@@ -1,0 +1,18 @@
+const express = require('express');
+const router = express.Router();
+const PortfolioProject = require('../models/PortfolioProject');
+
+// Get Portfolio Projects
+router.get('/projects', async (req, res) => {
+  const projects = await PortfolioProject.find();
+  res.json(projects);
+});
+
+// Add Portfolio Project
+router.post('/projects', async (req, res) => {
+  const project = new PortfolioProject(req.body);
+  await project.save();
+  res.json(project);
+});
+
+module.exports = router;
